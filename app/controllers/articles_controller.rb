@@ -1,6 +1,12 @@
 class ArticlesController < ApplicationController
 
+  before_action :find_article, only: [:show]
+
   def index
+
+  end
+
+  def show
 
   end
 
@@ -9,7 +15,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(artice_params)
+    @article = Article.new(article_params)
     if @article.save
       redirect_to @article
     else
@@ -18,6 +24,10 @@ class ArticlesController < ApplicationController
   end
 
   private
+
+    def find_article
+      @article = Article.find(params[:id])
+    end
 
     def article_params
       params.require(:article).permit(:title, :content)
